@@ -31,6 +31,8 @@ public class Post {
 	@ManyToOne
 	@JoinColumn(name = "categoria_id")
 	private Categoria categoria;
+	
+	@Column(length = 500, nullable = false)
 	private String contenido;
 	private LocalDateTime fechaPost;
 

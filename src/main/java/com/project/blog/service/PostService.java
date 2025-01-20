@@ -1,5 +1,6 @@
 package com.project.blog.service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,6 +38,12 @@ public class PostService {
 	
 	public List<Post> buscarPorContenido(String contenido){
 		return postRepository.buscarPorContenido(contenido);
+	}
+
+	public Post guardarPost(Post post) {
+		post.setFechaPost(LocalDateTime.now());
+		return postRepository.save(post);
+		
 	}
 
 }
