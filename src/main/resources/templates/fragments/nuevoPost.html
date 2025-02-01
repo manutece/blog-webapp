@@ -7,6 +7,10 @@
 				enctype="multipart/form-data">
 				
 				<input type="hidden" th:field="*{postId}" />
+				<div sec:authorize="isAuthenticated()">
+					<input type="hidden" name="username" th:value="${#authentication.principal.username}"/>
+				</div>
+				
 				
 				<!-- Área de texto -->
 				<div class="input-group mb-3">
