@@ -32,23 +32,34 @@ public class BlogController {
 	}
 
 	@GetMapping("")
-	public String homeBlog(Model model) {
-		List<Post> destacados = postService.buscarDestacados();
-		model.addAttribute("posts", destacados);
+	public String homeBlog(@RequestParam(name = "categoria", required = false) String categoria, Model model) {
 		List<Categoria> categorias = categoriaService.obtenerTodos();
 		model.addAttribute("categorias", categorias);
+		
+		List<Post> posts;
+		if (categoria == null || categoria.equals("Destacados")) {
+			posts = postService.buscarDestacados();
+			System.out.println(posts);
+		} else {
+			posts = postService.buscarPorCategoria(categoria);
+		}
+		System.out.println(posts);
+		System.out.println(posts.size());
+		
+		model.addAttribute("posts", posts);
 		return "home";
 	}
-	
+
 	@GetMapping("/{nombreUsuario}")
 	public String perfilUsuario(Model model, @PathVariable String nombreUsuario) {
 		List<Post> posts = postService.buscarPorUsuario(nombreUsuario);
 		model.addAttribute("posts", posts);
 		return "home";
 	}
-	
+
 	@GetMapping("/busqueda")
-	public String busquedaPost(Model model, @RequestParam("busqueda") String busqueda, @RequestParam("tipo") String tipo) {
+	public String busquedaPost(Model model, @RequestParam("busqueda") String busqueda,
+			@RequestParam("tipo") String tipo) {
 		List<Post> posts = new ArrayList<Post>();
 		if (tipo.equals("usuario")) {
 			posts = postService.buscarPorUsuarioParcial(busqueda);
@@ -58,7 +69,5 @@ public class BlogController {
 		model.addAttribute("posts", posts);
 		return "home";
 	}
-	
-	
-	
+
 }

@@ -19,54 +19,8 @@
 			<div class="col">COL1</div>
 				<div class="col-10 mt-5">
 					<div th:replace="~{fragments/nuevoPost :: nuevoPost}"></div>
-					
 					<h4>Últimos posts</h4>
-					<div class="mx-auto post-inicio">
-					<!-- Iteración de posts -->
-					<div th:each="ps : ${posts}" class="card mb-3 mx-auto w-100">
-						<div class="card-body">
-							<h5 class="card-title" th:text="${ps.usuario.nombre}"></h5>
-							<h6 class="card-subtitle mb-2 text-muted"
-								th:text="${ps.fechaPost}"></h6>
-							<p class="card-text" th:text="${ps.contenido + '...'}"></p>
-							<div class="d-flex justify-content-between align-items-center">
-								<button class="btn btn-primary btn-sm" data-bs-toggle="modal"
-									th:attr="data-bs-target='#modalPost_' + ${ps.postId}">
-									Leer más</button>
-								<div>
-									<button class="btn btn-outline-success btn-sm me-2">👍</button>
-									<button class="btn btn-outline-danger btn-sm">👎</button>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<!-- Modales -->
-					<div th:each="ps : ${posts}"
-						th:id="'modalPost_' + ${ps.postId}" class="modal fade"
-						tabindex="-1">
-						<div class="modal-dialog">
-							<div class="modal-content">
-								<div class="modal-header">
-									<h5 class="modal-title">
-										<a th:href="@{${ps.usuario.nombre}}"
-											th:text="${ps.usuario.nombre}"></a>
-									</h5>
-									<button type="button" class="btn-close" data-bs-dismiss="modal"
-										aria-label="Close"></button>
-								</div>
-								<div class="modal-body">
-									<p th:text="${ps.contenido}"></p>
-								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-secondary"
-										data-bs-dismiss="modal">Cerrar</button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-					
+					<div th:replace="~{fragments/postsLista :: postsLista}"></div>					
 				</div>
 			<div class="col">COL3</div>
 		</div>

@@ -39,6 +39,10 @@ public class PostService {
 	public List<Post> buscarPorContenido(String contenido){
 		return postRepository.buscarPorContenido(contenido);
 	}
+	
+	public List<Post> buscarPorCategoria(String categoria){
+		return postRepository.buscarPorCategoria(categoria);
+	}
 
 	public Post guardarPost(Post post) {
 		post.setFechaPost(LocalDateTime.now());

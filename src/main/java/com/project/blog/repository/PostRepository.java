@@ -22,4 +22,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 	List<Post> buscarPorContenido(String contenido);
 	
 	List<Post> findByContenidoContaining(String contenido);
+	
+	@Query(value = "select p from Post p where p.categoria.nombre = ?1")
+	List<Post> buscarPorCategoria(String categoria);
 }
