@@ -3,6 +3,7 @@ package com.project.blog.service;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -43,11 +44,14 @@ public class PostService {
 	public List<Post> buscarPorCategoria(String categoria){
 		return postRepository.buscarPorCategoria(categoria);
 	}
+	
+	public Optional<Post> buscarPorId(Long postId) {
+		return postRepository.findById(postId);
+	}
 
 	public Post guardarPost(Post post) {
 		post.setFechaPost(LocalDateTime.now());
 		return postRepository.save(post);
-		
 	}
 
 }

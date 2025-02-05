@@ -1,39 +1,22 @@
 <div th:fragment="nuevoPost"
 	class="card shadow-sm mx-auto mb-4 p-1">
 	<div class="d-flex px-4 py-2">
-		<!-- Contenido del formulario -->
 		<div class="flex-grow-1">
-			<form th:action="@{/postear/nuevo}" method="POST" th:object="${post}"
+			<form th:action="@{/post/nuevo}" method="POST" th:object="${post}"
 				enctype="multipart/form-data">
 				
-				<input type="hidden" th:field="*{postId}" />
+				<input type="hidden" th:field="*{postId}"/>
 				<div sec:authorize="isAuthenticated()">
 					<input type="hidden" name="username" th:value="${#authentication.principal.username}"/>
 				</div>
 				
-				
-				<!-- Área de texto -->
 				<div class="input-group mb-3">
 					<textarea class="form-control border-0"
 						th:field="*{contenido}" rows="3" placeholder="Escribe tu opinion aquí"
 						required></textarea>
 				</div>
 
-				<!-- Iconos y opciones -->
-				<div class="d-flex justify-content-between align-items-center">
-					<!-- Iconos opcionales -->
-					<div class="d-flex align-items-center">
-						<a href="#" class="text-decoration-none me-3">dsa<i
-							class="bi bi-image text-primary"></i></a> <a href="#"
-							class="text-decoration-none me-3">dsads<i
-							class="bi bi-camera-video text-primary"></i></a> <a href="#"
-							class="text-decoration-none me-3">aaaa<i
-							class="bi bi-emoji-smile text-primary"></i></a> <a href="#"
-							class="text-decoration-none me-3">da<i
-							class="bi bi-geo-alt text-primary"></i></a>
-					</div>
-
-					<!-- Select de categoría y botón de publicación -->
+				<div class="d-flex justify-content-end align-items-center">
 					<div class="input-group" style="width: auto;">
 						<select class="form-select border-0" th:field="*{categoria}" required>
 							<option value="" selected disabled>Categoría</option>

@@ -19,26 +19,54 @@
 			<div class="col">
 				<div class="mt-5" th:if="${categorias != null}">
 					<form th:action="@{/}" method="get" class="mb-4">
-	           			 <div class="form-group">
-	           			 	<h3 th:text="${param.categoria != null ? param.categoria : 'Destacados'}"></h3>
-	                		 <select id="categoria" name="categoria" class="form-control px-2" onchange="this.form.submit()">
-	                		 	 <option value="${param.categoria != null ? param.categoria : 'Destacados'}">Seleccione una categoría</option>
-	                   			 <option value="Destacados">Destacados</option>
-	                    		 <option th:each="categoria : ${categorias}" 
-	                           	 	th:value="${categoria.nombre}" 
-	                             	th:text="${categoria.nombre}"
-	                             	th:selected="${categoria.nombre == param.categoria}">
-	                    		</option>
-	                		 </select>
-	            		 </div>
-	        		</form>
+						<div class="form-group">
+							<h3
+								th:text="${param.categoria != null ? param.categoria : 'Destacados'}"></h3>
+							<select id="categoria" name="categoria" class="form-control px-2"
+								onchange="this.form.submit()">
+								<option
+									value="${param.categoria != null ? param.categoria : 'Destacados'}">Seleccione
+									una categoría</option>
+								<option value="Destacados">Destacados</option>
+								<option th:each="categoria : ${categorias}"
+									th:value="${categoria.nombre}" th:text="${categoria.nombre}"
+									th:selected="${categoria.nombre == param.categoria}">
+								</option>
+							</select>
+						</div>
+					</form>
 				</div>
 			</div>
-			
+
 			<div class="col-8 mt-5">
 				<div th:replace="~{fragments/postsLista :: postsLista}"></div>
 			</div>
-			<div class="col"></div>
+			<div class="col">
+				<div th:if="${alertaLike}"
+					class="toast align-items-center text-bg-success border-0 position-fixed bottom-0 end-0 m-3 show"
+					role="alert" aria-live="assertive" aria-atomic="true">
+					<div class="d-flex">
+						<div class="toast-body">
+							<span th:text="${alertaLike}"></span>
+						</div>
+						<button type="button" class="btn-close me-2 m-auto"
+							data-bs-dismiss="toast" aria-label="Close"></button>
+					</div>
+				</div>
+				<div th:if="${alertaDislike}"
+					class="toast align-items-center text-bg-danger border-0 position-fixed bottom-0 end-0 m-3 show"
+					role="alert" aria-live="assertive" aria-atomic="true">
+					<div class="d-flex">
+						<div class="toast-body">
+							<span th:text="${alertaDislike}"></span>
+						</div>
+						<button type="button" class="btn-close me-2 m-auto"
+							data-bs-dismiss="toast" aria-label="Close"></button>
+					</div>
+				</div>
+
+
+			</div>
 		</div>
 	</div>
 	<script
